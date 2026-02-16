@@ -2,4 +2,4 @@
 title: Test
 section: Philosophy
 ---
-Testing testing
+Testing testing. And more testing
