@@ -9,4 +9,21 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addShortcode('version', function () {
     return now
   })
+
+  eleventyConfig.addCollection("docsByFolder", function(collectionApi) {
+    const docs = collectionApi.getFilteredByGlob("docs/**/*.md");
+    const groups = {};
+
+    for (const doc of docs) {
+      const parts = doc.filePathStem.split("/");
+      // e.g. /docs/philosophy/my-page → "philosophy"
+      // e.g. /docs/my-page → "General"
+      const folder = parts.length > 2 ? parts[parts.length - 2] : "General";
+
+      if (!groups[folder]) groups[folder] = [];
+      groups[folder].push(doc);
+    }
+
+    return groups;
+  });
 }

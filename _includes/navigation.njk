@@ -11,14 +11,14 @@
   
   <nav class="sticky top-[4.5rem] w-64 pr-8 text-base lg:text-sm xl:w-72 xl:pr-16">
     <ul role="list" class="-ml-0.5 h-[calc(100vh-4.5rem)] overflow-y-auto py-7 pl-0.5 space-y-8">
-      {% for section, groupedDocs in collections.docs | sort(false, false, 'data.order') | groupby("data.section") %}
+      {% for section, groupedDocs in collections.docsByFolder %}
         <li>
           <h3 class="font-semibold tracking-tight text-slate-900">
             {{ section }}
           </h3>
           
           <ul role="list" class="pl-3 mt-3 space-y-2">
-            {% for doc in groupedDocs | sort(false, false, 'data.order') %}
+             {% for doc in groupedDocs %}
               <li>
                 <a href="{{ doc.url }}" class="text-slate-900 hover:text-slate-800">
                   {{ doc.data.title }}
